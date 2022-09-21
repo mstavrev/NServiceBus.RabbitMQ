@@ -113,7 +113,7 @@
 
             var channel = connection.CreateModel();
             channel.ModelShutdown += Channel_ModelShutdown;
-            channel.BasicQos(0, (ushort)Math.Min(prefetchCount, ushort.MaxValue), false);
+            channel.BasicQos(prefetchSize: 0, prefetchCount: 0, global: false);
 
             var consumer = new EventingBasicConsumer(channel);
             consumer.ConsumerCancelled += Consumer_ConsumerCancelled;
