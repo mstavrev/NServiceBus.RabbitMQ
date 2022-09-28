@@ -173,13 +173,16 @@
 
                 connectionShutdownCompleted = new TaskCompletionSource<bool>();
 
-                if (connection.IsOpen)
+                using(connection)
                 {
-                    connection.Close();
-                }
-                else
-                {
-                    connectionShutdownCompleted.SetResult(true);
+                    if (connection.IsOpen)
+                    {
+                        connection.Close();
+                    }
+                    else
+                    {
+                        connectionShutdownCompleted.SetResult(true);
+                    }
                 }
 
                 await connectionShutdownCompleted.Task.ConfigureAwait(false);
@@ -270,12 +273,13 @@
                 {
                     try
                     {
-                        if (connection.IsOpen)
+                        using(connection)
                         {
-                            connection.Close();
+                            if (connection.IsOpen)
+                            {
+                                connection.Abort();
+                            }
                         }
-
-                        connection.Dispose();
 
                         Logger.InfoFormat("'{0}': Attempting to reconnect in {1} seconds.", name, retryDelay.TotalSeconds);
 
