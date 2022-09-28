@@ -273,13 +273,7 @@
                 {
                     try
                     {
-                        using(connection)
-                        {
-                            if (connection.IsOpen)
-                            {
-                                connection.Abort();
-                            }
-                        }
+                        connection.Dispose();  // Calls .Abort() if not yet dispose
 
                         Logger.InfoFormat("'{0}': Attempting to reconnect in {1} seconds.", name, retryDelay.TotalSeconds);
 
