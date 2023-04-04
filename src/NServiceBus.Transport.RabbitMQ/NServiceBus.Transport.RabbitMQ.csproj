@@ -20,8 +20,8 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <PackageId>NServiceBus.RabbitMQ</PackageId>
-    <Description>RabbitMQ support for NServiceBus</Description>
+    <PackageId>RC.NServiceBus.RabbitMQ</PackageId>
+    <Description>RabbitMQ support for NServiceBus with RC patches</Description>
   </PropertyGroup>
 
   <ItemGroup>
